@@ -2,7 +2,7 @@ import PropTypes from "prop-types"
 import React, {useState, useEffect} from "react";
 import axios from "axios"
 import Movie from "./Movie";
-
+import "./App.css";
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -19,15 +19,22 @@ function App() {
     getMovies();
   },[])
   return (
-    <div className="App">
-    <div> {isLoading ? "Loading" : movies1.map(movie =>{
-      console.log(movie);
-      return <Movie key={movie.id} id={movie.id} title={movie.title} summary={movie.summary}
-      poster={movie.medium_cover_image} year={movie.year}
-      />
-    })}</div>
-
+    <section className="container">
+    <div> {isLoading} ?
+    <div className="loader">
+      <span className="loader_text">Loading~.~</span>
     </div>
+    : <div className="movies">
+      {movies1.map(movie =>
+      {
+      return <Movie key={movie.id} id={movie.id} title={movie.title} summary={movie.summary}
+      poster={movie.medium_cover_image} year={movie.year} genres={movie.genres}
+      />
+      })}
+      </div>
+      </div>
+
+    </section>
   );
 }
 
